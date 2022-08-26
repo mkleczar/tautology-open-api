@@ -1,0 +1,76 @@
+openapi: 3.0.0
+
+info:
+  version: '1'
+  title: Tautology web API
+
+paths:
+  /time:
+    get:
+      tags:
+        - test
+      summary: return system time
+      operationId: time
+      responses:
+        200:
+          description: current time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeResponse'
+  /echo/{text}:
+    get:
+      tags:
+        - test
+      summary: sends back text parameter
+      operationId: echo
+      parameters:
+        - in: path
+          name: text
+          schema:
+            type: string
+          required: true
+          description: text to send back
+      responses:
+        200:
+          description: sends back text parameter value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EchoResponse'
+  /test:
+    get:
+      tags:
+        - test
+      summary: just test
+      operationId: test
+      responses:
+        200:
+          description: test response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestResponse'
+
+components:
+  schemas:
+    TestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'Hello from Spring'
+          default: 'Hello visitor'
+
+    EchoResponse:
+      type: object
+      properties:
+        echo:
+          type: string
+
+    TimeResponse:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
