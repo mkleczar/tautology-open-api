@@ -5,6 +5,49 @@ info:
   title: Tautology web API
 
 paths:
+
+  /parameters:
+    post:
+      tags:
+        - tautology
+      summary: specify required parameters for passed expression
+      operationId: parameters
+      requestBody:
+        description: request must contain expression
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParametersRequest'
+      responses:
+        200:
+          description: required expression parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParametersResponse'
+
+  /validate:
+    post:
+      tags:
+        - tautology
+      summary: validates passed expression against variable values
+      operationId: validate
+      requestBody:
+        description: request must contain expression and parameters value
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidationRequest'
+      responses:
+        200:
+          description: validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+
   /time:
     get:
       tags:
@@ -54,6 +97,30 @@ paths:
 
 components:
   schemas:
+
+    ParametersRequest:
+      type: object
+      properties:
+        expression:
+          type: string
+
+    ParametersResponse:
+      type: object
+      properties:
+        parameters:
+          type: array
+          items:
+            type: string
+
+    ValidationRequest:
+      type: object
+      properties:
+        expression:
+          type: string
+
+    ValidationResponse:
+      type: object
+
     TestResponse:
       type: object
       properties:
