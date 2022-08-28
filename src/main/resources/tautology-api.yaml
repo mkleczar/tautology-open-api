@@ -107,6 +107,8 @@ components:
     ParametersResponse:
       type: object
       properties:
+        expression:
+          type: string
         parameters:
           type: array
           items:
@@ -117,9 +119,31 @@ components:
       properties:
         expression:
           type: string
+        parameters:
+          $ref:  '#/components/schemas/Parameters'
 
     ValidationResponse:
       type: object
+      properties:
+        expression:
+          type: string
+        parameters:
+          $ref:  '#/components/schemas/Parameters'
+        value:
+          type: boolean
+
+    Parameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Parameter'
+
+    Parameter:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: boolean
 
     TestResponse:
       type: object
