@@ -48,6 +48,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationResponse'
 
+  /tautology:
+    post:
+      tags:
+        - tautology
+      summary: check if passed expression is tautology
+      operationId: tautology
+      requestBody:
+        description: request must contain expression
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TautologyRequest'
+      responses:
+        200:
+          description: validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TautologyResponse'
   /time:
     get:
       tags:
@@ -129,6 +149,20 @@ components:
           type: string
         parameters:
           $ref:  '#/components/schemas/Parameters'
+        value:
+          type: boolean
+
+    TautologyRequest:
+      type: object
+      properties:
+        expression:
+          type: string
+
+    TautologyResponse:
+      type: object
+      properties:
+        expression:
+          type: string
         value:
           type: boolean
 
